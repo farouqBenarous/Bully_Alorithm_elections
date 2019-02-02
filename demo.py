@@ -16,7 +16,7 @@ class StateVector():
         self.Up = []
 
 
-class Bully():
+class Node():
     def __init__(self, addr, config_file='server_config'):
         self.Statevector = StateVector()
         self.Statevector.state = 'Normal'
@@ -169,10 +169,10 @@ class Bully():
 
 def main():
     addr = sys.argv[1]
-    bully = Bully(addr)
-    server = zerorpc.Server(bully)
+    node = Node(addr)
+    server = zerorpc.Server(Node)
     server.bind('tcp://' + addr)
-    bully.start()
+    node.start()
     # Start server
     print ('[%s] Starting ZeroRPC Server' % addr)
     server.run()
